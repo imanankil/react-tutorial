@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Post from './Post';
 import NewPost from './NewPost';
-import Modal from './Modal';
+import Modal from './Modal'
 import classes from './PostsList.module.css';
-    function PostsList () {
+    function PostsList ({isPosting, onStopPosting}) {
         const [enteredBody, setEnteredBody] = useState('');
-        const [enteredAuthor,setEnterAuthor] = useState('');
+        const [enteredAuthor,setEnteredAuthor] = useState('');
     
+
+
         function bodyChangeHandler (event) {
             setEnteredBody(event.target.value);
     }
@@ -16,12 +18,15 @@ import classes from './PostsList.module.css';
 
     return (
         <>
-            <Modal>
+        {isPosting && (
+        <Modal onClose={onStopPosting}>
                 <NewPost 
                     onBodyChange={bodyChangeHandler} 
                     onAuthorChange={authorChangeHandler}
                 />
             </Modal>
+            )}
+        
             <ul className={classes.posts}>
                 <Post author={enteredAuthor} body={enteredBody}/>
                 <Post author="Manuel" body="Check out the full course!"/>
@@ -31,4 +36,4 @@ import classes from './PostsList.module.css';
 }
 
 
-export default PostsList
+export default PostsList;
