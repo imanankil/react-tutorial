@@ -23,6 +23,7 @@ import classes from './PostsList.module.css';
                 <NewPost 
                     onBodyChange={bodyChangeHandler} 
                     onAuthorChange={authorChangeHandler}
+                    onCancel={onStopPosting}
                 />
             </Modal>
             )}
