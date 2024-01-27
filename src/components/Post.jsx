@@ -1,16 +1,15 @@
-import {Outlet} from 'react-router-dom'
-import PostsList from '../components/PostsList';
-
-function Posts() {
-  return (
-    <>
-      <Outlet/>
-      <main>
-        <PostsList 
-        />
-      </main>
-   </>
-  );
+import {Link} from 'react-router-dom';
+import classes from './Post.module.css';
+function Post({id, author, body}) {
+    return (
+    <li className={classes.post}>
+      <Link to={id}>
+      <p className={classes.author}>{author}</p>
+      <p className={classes.text}>{body}</p>
+      </Link>
+    </li>
+      );
 }
 
-export default Posts;
+
+export default Post;
