@@ -1,26 +1,21 @@
-import { useState } from 'react'; 
-import PostsList from './components/PostsList';
-import MainHeader from './components/MainHeader';
-function App() {
-  const [modalIsVisible, setModalIsVisible] = useState(false);       
+import {Outlet} from 'react-router-dom'
+import PostsList from '../components/PostsList';
 
-function showModalHandler() {
-  setModalIsVisible(true);
-}
-
-  function hideModalHandler() {
-    setModalIsVisible(false);
-}
+function Posts() {
   return (
     <>
-      <MainHeader onCreatePost={showModalHandler}/>
+      <Outlet/>
       <main>
-        <PostsList isPosting={modalIsVisible} 
-        onStopPosting={hideModalHandler} 
+        <PostsList 
         />
       </main>
    </>
   );
 }
 
-export default App;
+export default Posts;
+export async function loader() {
+  const response = await fetch('http://localhost:8080/posts')
+  const resData = await response.json();
+  return resData.posts;
+}
